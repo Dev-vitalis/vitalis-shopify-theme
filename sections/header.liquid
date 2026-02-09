@@ -1,0 +1,4 @@
+<header style="background:{{ settings.color_primary | default: '#2d8659' }};color:white;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;">
+  <a href="/" style="color:white;text-decoration:none;font-weight:bold;">{{ shop.name }}</a>
+  <a href="/cart" style="color:white;text-decoration:none;">Carrinho ({{ cart.item_count }})</a>
+</header>
