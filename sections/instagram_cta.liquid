@@ -1,0 +1,29 @@
+{% style %}
+  .instagram-cta { padding: 2.5rem 1rem; text-align: center; background: var(--color-bg); }
+  .instagram-cta__title { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; margin: 0 0 0.75rem; color: var(--color-text); }
+  .instagram-cta__link { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem; color: var(--color-primary-light); font-weight: 600; }
+  .instagram-cta__link:hover { color: var(--color-primary); text-decoration: none; }
+{% endstyle %}
+
+<section class="instagram-cta section">
+  <div class="container">
+    <h2 class="instagram-cta__title">{{ section.settings.title | default: '# Síguenos en Instagram' }}</h2>
+    {% if section.settings.handle != blank %}
+      <p style="margin:0;color:var(--color-text-muted);">@{{ section.settings.handle }}</p>
+    {% endif %}
+    {% if section.settings.url != blank %}
+      <a href="{{ section.settings.url }}" class="instagram-cta__link" target="_blank" rel="noopener">Ver perfil →</a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Instagram / Redes",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Título", "default": "# Síguenos en Instagram" },
+    { "type": "text", "id": "handle", "label": "Usuario (sin @)" },
+    { "type": "url", "id": "url", "label": "Enlace al perfil" }
+  ]
+}
+{% endschema %}

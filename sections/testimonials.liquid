@@ -1,0 +1,42 @@
+{% style %}
+  .testimonials { padding: 3rem 0; background: var(--color-bg); }
+  .testimonials .section-title { margin-bottom: 2rem; }
+  .testimonials__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+  .testimonial { background: var(--color-bg-white); padding: 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow-sm); }
+  .testimonial__quote { font-size: 0.95rem; color: var(--color-text); line-height: 1.6; margin: 0 0 1rem; font-style: italic; }
+  .testimonial__author { font-weight: 600; color: var(--color-primary-light); font-size: 0.9rem; }
+{% endstyle %}
+
+<section class="testimonials section">
+  <div class="container">
+    <h2 class="section-title">{{ section.settings.title | default: 'Personas reales. Resultados increíbles.' }}</h2>
+    <div class="testimonials__grid">
+      {% for block in section.blocks %}
+        <div class="testimonial" {{ block.shopify_attributes }}>
+          <p class="testimonial__quote">"{{ block.settings.quote | default: 'Excelente producto, llegó a tiempo y me siento mucho mejor.' }}"</p>
+          <p class="testimonial__author">— {{ block.settings.author | default: 'Cliente' }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonios",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Título", "default": "Personas reales. Resultados increíbles." }
+  ],
+  "blocks": [
+    { "type": "testimonial", "name": "Testimonio", "settings": [
+      { "type": "textarea", "id": "quote", "label": "Cita" },
+      { "type": "text", "id": "author", "label": "Autor" }
+    ]}
+  ],
+  "presets": [{ "name": "Testimonios", "blocks": [
+    { "type": "testimonial", "settings": { "quote": "Excelente producto, llegó a tiempo.", "author": "María G." }},
+    { "type": "testimonial", "settings": { "quote": "Muy buena calidad y atención.", "author": "Carlos R." }},
+    { "type": "testimonial", "settings": { "quote": "Recomendado 100%.", "author": "Ana L." }}
+  ]}]
+}
+{% endschema %}

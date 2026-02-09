@@ -1,0 +1,53 @@
+{% style %}
+  .story { padding: 3.5rem 0; background: var(--color-bg-white); }
+  .story__inner { max-width: 720px; margin: 0 auto; }
+  .story__title { font-family: var(--font-heading); font-size: clamp(1.25rem, 2.5vw, 1.5rem); font-weight: 700; text-align: center; margin: 0 0 1.5rem; color: var(--color-text); text-transform: uppercase; letter-spacing: 0.03em; }
+  .story__text { color: var(--color-text); line-height: 1.75; margin-bottom: 1rem; white-space: pre-line; }
+  .story__stat { text-align: center; font-family: var(--font-heading); font-size: 1.75rem; font-weight: 700; color: var(--color-primary-light); margin: 1.5rem 0 0.25rem; }
+  .story__stat-label { text-align: center; color: var(--color-text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; }
+  .story__values { list-style: none; padding: 0; margin: 1rem 0 1.5rem; }
+  .story__values li { padding: 0.35rem 0; display: flex; align-items: center; gap: 0.5rem; }
+  .story__cta { text-align: center; margin-top: 1.5rem; }
+{% endstyle %}
+
+<section class="story section">
+  <div class="container">
+    <div class="story__inner">
+      <h2 class="story__title">{{ section.settings.title | default: 'De una crisis a una misión de vida' }}</h2>
+      <div class="story__text">{{ section.settings.body | default: "Creemos en la transparencia, en la calidad y en hacer del bienestar una prioridad.\n\nHoy, miles de personas confían en nuestros productos para sentirse mejor cada día." }}</div>
+      {% if section.settings.stat_number != blank %}
+        <p class="story__stat">{{ section.settings.stat_number }}</p>
+        <p class="story__stat-label">{{ section.settings.stat_label | default: 'personas han transformado su bienestar con nosotros' }}</p>
+      {% endif %}
+      {% if section.settings.value_1 != blank or section.settings.value_2 != blank or section.settings.value_3 != blank %}
+        <ul class="story__values">
+          {% if section.settings.value_1 != blank %}<li>💚 {{ section.settings.value_1 }}</li>{% endif %}
+          {% if section.settings.value_2 != blank %}<li>💚 {{ section.settings.value_2 }}</li>{% endif %}
+          {% if section.settings.value_3 != blank %}<li>💚 {{ section.settings.value_3 }}</li>{% endif %}
+        </ul>
+      {% endif %}
+      {% if section.settings.cta_text != blank and section.settings.cta_url != blank %}
+        <div class="story__cta">
+          <a href="{{ section.settings.cta_url }}" class="btn btn--primary">{{ section.settings.cta_text }}</a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Historia / Misión",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Título", "default": "De una crisis a una misión de vida" },
+    { "type": "textarea", "id": "body", "label": "Texto (soporta saltos de línea)" },
+    { "type": "text", "id": "stat_number", "label": "Número destacado", "default": "7.500+" },
+    { "type": "text", "id": "stat_label", "label": "Etiqueta del número", "default": "personas han transformado su bienestar con nosotros" },
+    { "type": "text", "id": "value_1", "label": "Valor 1", "default": "Creemos en la transparencia." },
+    { "type": "text", "id": "value_2", "label": "Valor 2", "default": "Creemos en la calidad." },
+    { "type": "text", "id": "value_3", "label": "Valor 3", "default": "Creemos en hacer del bienestar una prioridad." },
+    { "type": "text", "id": "cta_text", "label": "Texto del botón", "default": "Ver productos" },
+    { "type": "url", "id": "cta_url", "label": "Enlace del botón" }
+  ]
+}
+{% endschema %}

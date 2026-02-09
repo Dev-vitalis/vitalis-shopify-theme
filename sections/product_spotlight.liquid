@@ -1,0 +1,103 @@
+{% style %}
+  .spotlight { padding: 2.5rem 0; background: var(--color-bg-white); }
+  .spotlight__scroll { display: flex; gap: 1.5rem; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0.5rem 0 1rem; -webkit-overflow-scrolling: touch; }
+  .spotlight__scroll::-webkit-scrollbar { height: 6px; }
+  .spotlight__scroll::-webkit-scrollbar-thumb { background: var(--color-primary-light); border-radius: 3px; }
+  .spotlight__card { flex: 0 0 min(90%, 520px); scroll-snap-align: start; background: var(--color-bg); border-radius: var(--radius-lg); padding: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: center; }
+  .spotlight__card:nth-child(even) { direction: rtl; }
+  .spotlight__card:nth-child(even) > * { direction: ltr; }
+  .spotlight__image { aspect-ratio: 1; border-radius: var(--radius); overflow: hidden; background: var(--color-bg-white); }
+  .spotlight__image img { width: 100%; height: 100%; object-fit: cover; }
+  .spotlight__body { }
+  .spotlight__rating { font-size: 0.9rem; color: var(--color-text-muted); margin-bottom: 0.5rem; }
+  .spotlight__title { font-family: var(--font-heading); font-size: 1.35rem; font-weight: 700; line-height: 1.3; margin: 0 0 0.75rem; color: var(--color-text); }
+  .spotlight__title a { color: inherit; }
+  .spotlight__title a:hover { color: var(--color-primary-light); }
+  .spotlight__text { font-size: 0.95rem; color: var(--color-text-muted); margin: 0 0 1rem; line-height: 1.6; }
+  .spotlight__cta { display: inline-block; padding: 0.6rem 1.25rem; background: var(--color-accent-btn); color: #fff; font-weight: 700; border-radius: var(--radius); }
+  .spotlight__cta:hover { opacity: 0.95; color: #fff; text-decoration: none; }
+  @media (max-width: 700px) {
+    .spotlight__card { grid-template-columns: 1fr; flex: 0 0 85%; direction: ltr; }
+    .spotlight__card:nth-child(even) { direction: ltr; }
+    .spotlight__image { max-height: 200px; aspect-ratio: 16/10; }
+  }
+{% endstyle %}
+
+<section class="spotlight section">
+  <div class="container">
+    {% if section.settings.title != blank %}
+      <h2 class="section-title" style="margin-bottom: 1.5rem;">{{ section.settings.title }}</h2>
+    {% endif %}
+    <div class="spotlight__scroll">
+      {% for block in section.blocks %}
+        <div class="spotlight__card" {{ block.shopify_attributes }}>
+          <div class="spotlight__image">
+            {% if block.settings.image != blank %}
+              <img src="{{ block.settings.image | image_url: width: 500 }}" alt="" loading="lazy" width="500" height="500">
+            {% elsif block.settings.product != blank %}
+              {% assign prod = block.settings.product %}
+              {% if prod.featured_image %}
+                <img src="{{ prod.featured_image | image_url: width: 500 }}" alt="{{ prod.title }}" loading="lazy" width="500" height="500">
+              {% else %}
+                <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--color-text-muted);">Sin imagen</div>
+              {% endif %}
+            {% else %}
+              <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--color-primary-light);color:#fff;font-size:3rem;">🌿</div>
+            {% endif %}
+          </div>
+          <div class="spotlight__body">
+            {% if block.settings.rating != blank %}
+              <p class="spotlight__rating">{{ block.settings.rating }}</p>
+            {% endif %}
+            <h3 class="spotlight__title">
+              {% if block.settings.link != blank %}
+                <a href="{{ block.settings.link }}">{{ block.settings.title | default: 'Producto destacado' }}</a>
+              {% else %}
+                {{ block.settings.title | default: 'Producto destacado' }}
+              {% endif %}
+            </h3>
+            <p class="spotlight__text">{{ block.settings.text | default: 'Descripción del producto y sus beneficios para tu bienestar.' }}</p>
+            {% if block.settings.cta_text != blank and block.settings.link != blank %}
+              <a href="{{ block.settings.link }}" class="spotlight__cta">{{ block.settings.cta_text }}</a>
+            {% elsif block.settings.product != blank %}
+              <a href="{{ block.settings.product.url }}" class="spotlight__cta">{{ block.settings.cta_text | default: 'Más información' }}</a>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Destacados producto (estilo Nutrijema)",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Título de la sección", "default": "" }
+  ],
+  "blocks": [
+    {
+      "type": "spotlight",
+      "name": "Producto / Destacado",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Producto (opcional)" },
+        { "type": "image_picker", "id": "image", "label": "Imagen (si no hay producto)" },
+        { "type": "text", "id": "rating", "label": "Rating", "default": "4.6/5 (1612 Reviews)" },
+        { "type": "text", "id": "title", "label": "Título" },
+        { "type": "textarea", "id": "text", "label": "Descripción" },
+        { "type": "text", "id": "cta_text", "label": "Texto del botón", "default": "Más información" },
+        { "type": "url", "id": "link", "label": "Enlace del botón" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Destacados producto",
+      "blocks": [
+        { "type": "spotlight", "settings": { "title": "Descubre los productos que transforman tu bienestar", "rating": "4.6/5 (1612 Reviews)", "text": "Productos naturales para tu día a día. Calidad y confianza.", "cta_text": "Más información" }},
+        { "type": "spotlight", "settings": { "title": "Nutre tu cuerpo y mente", "rating": "4.6/5 (1612 Reviews)", "text": "Suplementos y vitaminas para apoyar tu bienestar general.", "cta_text": "Más información" }}
+      ]
+    }
+  ]
+}
+{% endschema %}

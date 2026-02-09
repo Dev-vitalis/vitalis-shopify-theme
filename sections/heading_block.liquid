@@ -1,0 +1,19 @@
+{% style %}
+  .heading-block { padding: 2rem 1rem; text-align: center; background: var(--color-bg-white); }
+  .heading-block__title { font-family: var(--font-heading); font-size: clamp(1.35rem, 3vw, 1.75rem); font-weight: 700; margin: 0; color: var(--color-text); }
+{% endstyle %}
+
+<section class="heading-block">
+  <div class="container">
+    <h2 class="heading-block__title">{{ section.settings.title | default: 'Lo que tu cuerpo necesita para lucir y sentirse increíble.' }}</h2>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Título de sección",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Título", "default": "Lo que tu cuerpo necesita para lucir y sentirse increíble." }
+  ]
+}
+{% endschema %}

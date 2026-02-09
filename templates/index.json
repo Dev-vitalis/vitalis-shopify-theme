@@ -3,41 +3,61 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "title": "Tu salud, nuestra prioridad",
-        "subtitle": "Productos pensados para tu bienestar. Envío a todo el país y pago contra entrega.",
+        "title": "¡Descubre los productos que transforman tu bienestar!",
+        "subtitle": "Envío a todo el país y pago contra entrega.",
         "cta_text": "Ver productos",
         "cta_url": ""
       }
     },
     "trust_bar": {
       "type": "trust_bar",
-      "settings": {}
-    },
-    "benefits": {
-      "type": "benefits",
       "settings": {
-        "title": "Encuentra por objetivo de salud",
-        "subtitle": "Elige la categoría que mejor se adapte a lo que buscas."
-      },
+        "item_1": "Envíos gratis",
+        "item_2": "Satisfacción garantizada",
+        "item_3": "Soporte 24/7",
+        "item_4": "Pagas en efectivo",
+        "item_5": "5.000+ clientes satisfechos"
+      }
+    },
+    "product_spotlight": {
+      "type": "product_spotlight",
+      "settings": { "title": "" },
       "blocks": {
-        "inmunidad": {
-          "type": "benefit",
-          "settings": { "icon": "🛡️", "title": "Inmunidad", "text": "Refuerza tus defensas", "link": "" }
+        "spot_1": {
+          "type": "spotlight",
+          "settings": {
+            "title": "Descubre los productos que transforman tu bienestar",
+            "rating": "4.6/5 (1612 Reviews)",
+            "text": "Productos naturales para tu día a día. Calidad y confianza.",
+            "cta_text": "Más información"
+          }
         },
-        "energia": {
-          "type": "benefit",
-          "settings": { "icon": "⚡", "title": "Energía", "text": "Más vitalidad en el día a día", "link": "" }
+        "spot_2": {
+          "type": "spotlight",
+          "settings": {
+            "title": "Nutre tu piel, fortalece tu cabello y protege tus articulaciones",
+            "rating": "4.6/5 (1612 Reviews)",
+            "text": "Con el poder de ingredientes naturales. Mejora firmeza, cabello y articulaciones.",
+            "cta_text": "Más información"
+          }
         },
-        "digestion": {
-          "type": "benefit",
-          "settings": { "icon": "🌿", "title": "Digestión", "text": "Bienestar digestivo", "link": "" }
-        },
-        "bienestar": {
-          "type": "benefit",
-          "settings": { "icon": "💪", "title": "Bienestar general", "text": "Cuida tu cuerpo y mente", "link": "" }
+        "spot_3": {
+          "type": "spotlight",
+          "settings": {
+            "title": "Mejora tu digestión y equilibra tu bienestar",
+            "rating": "4.6/5 (1612 Reviews)",
+            "text": "Fórmulas naturales para tu bienestar diario. Digestión y energía.",
+            "cta_text": "Más información"
+          }
         }
       },
-      "block_order": ["inmunidad", "energia", "digestion", "bienestar"]
+      "block_order": ["spot_1", "spot_2", "spot_3"]
+    },
+    "heading_block": {
+      "type": "heading_block",
+      "settings": {
+        "title": "Lo que tu cuerpo necesita para lucir y sentirse increíble."
+      }
     },
     "featured_collection": {
       "type": "featured_collection",
@@ -49,10 +69,40 @@
         "show_view_all": true
       }
     },
-    "about_trust": {
-      "type": "about_trust",
-      "settings": {}
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {
+        "title": "Personas reales. Resultados increíbles."
+      },
+      "blocks": {
+        "t1": { "type": "testimonial", "settings": { "quote": "Excelente producto, llegó a tiempo y me siento mucho mejor.", "author": "María G." }},
+        "t2": { "type": "testimonial", "settings": { "quote": "Muy buena calidad y atención. Recomendado.", "author": "Carlos R." }},
+        "t3": { "type": "testimonial", "settings": { "quote": "Los mejores productos para el bienestar. 100% recomendado.", "author": "Ana L." }}
+      },
+      "block_order": ["t1", "t2", "t3"]
+    },
+    "story_mission": {
+      "type": "story_mission",
+      "settings": {
+        "title": "De una crisis a una misión de vida",
+        "body": "Creemos en la transparencia, en la calidad y en hacer del bienestar una prioridad.\n\nHoy, miles de personas confían en nuestros productos para sentirse mejor cada día.",
+        "stat_number": "7.500+",
+        "stat_label": "personas han transformado su bienestar con nosotros",
+        "value_1": "Creemos en la transparencia.",
+        "value_2": "Creemos en la calidad.",
+        "value_3": "Creemos en hacer del bienestar una prioridad.",
+        "cta_text": "Ver productos",
+        "cta_url": ""
+      }
+    },
+    "instagram_cta": {
+      "type": "instagram_cta",
+      "settings": {
+        "title": "# Síguenos en Instagram",
+        "handle": "",
+        "url": ""
+      }
     }
   },
-  "order": ["hero", "trust_bar", "benefits", "featured_collection", "about_trust"]
+  "order": ["hero", "trust_bar", "product_spotlight", "heading_block", "featured_collection", "testimonials", "story_mission", "instagram_cta"]
 }

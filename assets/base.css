@@ -9,7 +9,7 @@
   --color-text: #1a2e28;
   --color-text-muted: #5a6f68;
   --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
-  --font-heading: 'Outfit', var(--font-sans);
+  --font-heading: 'Poppins', var(--font-sans);
   --shadow-sm: 0 1px 3px rgba(26, 95, 74, 0.08);
   --shadow-md: 0 4px 12px rgba(26, 95, 74, 0.1);
   --radius: 12px;
