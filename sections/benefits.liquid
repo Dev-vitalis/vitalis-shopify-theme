@@ -1,0 +1,62 @@
+{% style %}
+  .benefits { padding: 3.5rem 0; }
+  .benefits .section-title { margin-bottom: 2rem; }
+  .benefit-card { background: var(--color-bg-white); border-radius: var(--radius-lg); padding: 1.75rem; text-align: center; box-shadow: var(--shadow-sm); transition: transform .2s, box-shadow .2s; }
+  .benefit-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+  .benefit-card__icon { width: 56px; height: 56px; margin: 0 auto 1rem; border-radius: 50%; background: linear-gradient(135deg, var(--color-primary-light), var(--color-teal)); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+  .benefit-card__title { font-family: var(--font-heading); font-weight: 600; font-size: 1.1rem; margin: 0 0 0.35rem; color: var(--color-text); }
+  .benefit-card__text { font-size: 0.9rem; color: var(--color-text-muted); margin: 0; }
+  .benefit-card a { color: inherit; }
+  .benefit-card a:hover { text-decoration: none; }
+{% endstyle %}
+
+<section class="benefits section section--alt" id="beneficios">
+  <div class="container">
+    <h2 class="section-title">{{ section.settings.title | default: 'Encuentra por objetivo de salud' }}</h2>
+    <p class="section-subtitle">{{ section.settings.subtitle | default: 'Elige la categoría que mejor se adapte a lo que buscas.' }}</p>
+    <div class="grid grid--4">
+      {% for block in section.blocks %}
+        <div class="benefit-card" {{ block.shopify_attributes }}>
+          <div class="benefit-card__icon">{{ block.settings.icon | default: '❤️' }}</div>
+          <h3 class="benefit-card__title">{{ block.settings.title | default: 'Inmunidad' }}</h3>
+          <p class="benefit-card__text">{{ block.settings.text | default: 'Refuerza tus defensas' }}</p>
+          {% if block.settings.link != blank %}
+            <a href="{{ block.settings.link }}" class="btn btn--outline" style="margin-top: 1rem; font-size: 0.9rem;">Ver más</a>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+    {% if section.blocks.size == 0 %}
+      <div class="grid grid--4">
+        <div class="benefit-card"><div class="benefit-card__icon">🛡️</div><h3 class="benefit-card__title">Inmunidad</h3><p class="benefit-card__text">Refuerza tus defensas</p><a href="/collections/all" class="btn btn--outline" style="margin-top:1rem;font-size:.9rem">Ver más</a></div>
+        <div class="benefit-card"><div class="benefit-card__icon">⚡</div><h3 class="benefit-card__title">Energía</h3><p class="benefit-card__text">Más vitalidad en el día a día</p><a href="/collections/all" class="btn btn--outline" style="margin-top:1rem;font-size:.9rem">Ver más</a></div>
+        <div class="benefit-card"><div class="benefit-card__icon">🌿</div><h3 class="benefit-card__title">Digestión</h3><p class="benefit-card__text">Bienestar digestivo</p><a href="/collections/all" class="btn btn--outline" style="margin-top:1rem;font-size:.9rem">Ver más</a></div>
+        <div class="benefit-card"><div class="benefit-card__icon">💪</div><h3 class="benefit-card__title">Bienestar general</h3><p class="benefit-card__text">Cuida tu cuerpo y mente</p><a href="/collections/all" class="btn btn--outline" style="margin-top:1rem;font-size:.9rem">Ver más</a></div>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Beneficios",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Título", "default": "Encuentra por objetivo de salud" },
+    { "type": "text", "id": "subtitle", "label": "Subtítulo", "default": "Elige la categoría que mejor se adapte a lo que buscas." }
+  ],
+  "blocks": [
+    { "type": "benefit", "name": "Beneficio", "settings": [
+      { "type": "text", "id": "icon", "label": "Emoji o icono", "default": "❤️" },
+      { "type": "text", "id": "title", "label": "Título", "default": "Inmunidad" },
+      { "type": "text", "id": "text", "label": "Descripción corta", "default": "Refuerza tus defensas" },
+      { "type": "url", "id": "link", "label": "Enlace" }
+    ]}
+  ],
+  "presets": [{ "name": "Beneficios", "blocks": [
+    { "type": "benefit", "settings": { "icon": "🛡️", "title": "Inmunidad", "text": "Refuerza tus defensas" }},
+    { "type": "benefit", "settings": { "icon": "⚡", "title": "Energía", "text": "Más vitalidad" }},
+    { "type": "benefit", "settings": { "icon": "🌿", "title": "Digestión", "text": "Bienestar digestivo" }},
+    { "type": "benefit", "settings": { "icon": "💪", "title": "Bienestar general", "text": "Cuerpo y mente" }}
+  ]}]
+}
+{% endschema %}

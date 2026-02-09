@@ -4,7 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ page_title }} - {{ shop.name }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
   {{ content_for_header }}
+  <style>
+    :root { --color-primary: {{ settings.color_primary | default: '#1a5f4a' }}; --color-primary-light: {{ settings.color_primary | default: '#2d8659' }}; --color-accent: {{ settings.color_accent | default: '#3d9b7a' }}; --color-teal: {{ settings.color_accent | default: '#5cb8a8' }}; }
+  </style>
   {{ 'base.css' | asset_url | stylesheet_tag }}
 </head>
 <body>

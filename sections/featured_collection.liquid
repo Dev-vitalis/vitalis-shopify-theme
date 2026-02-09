@@ -1,0 +1,61 @@
+{% style %}
+  .featured { padding: 3.5rem 0; }
+  .product-card { background: var(--color-bg-white); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); transition: box-shadow .2s; }
+  .product-card:hover { box-shadow: var(--shadow-md); }
+  .product-card__image { aspect-ratio: 1; background: var(--color-bg); }
+  .product-card__image img { width: 100%; height: 100%; object-fit: cover; }
+  .product-card__body { padding: 1rem; }
+  .product-card__title { font-weight: 600; font-size: 1rem; margin: 0 0 0.25rem; color: var(--color-text); }
+  .product-card__title a { color: inherit; }
+  .product-card__title a:hover { color: var(--color-primary-light); }
+  .product-card__price { font-weight: 700; color: var(--color-primary-light); }
+  .product-card .btn { width: 100%; text-align: center; margin-top: 0.5rem; padding: 0.6rem; font-size: 0.9rem; }
+{% endstyle %}
+
+{% assign collection = collections[section.settings.collection] | default: collections.all %}
+
+<section class="featured section">
+  <div class="container">
+    <h2 class="section-title">{{ section.settings.title | default: 'Productos destacados' }}</h2>
+    <p class="section-subtitle">{{ section.settings.subtitle | default: 'Selección pensada para tu bienestar.' }}</p>
+    <div class="grid grid--4">
+      {% for product in collection.products limit: section.settings.products_to_show %}
+        <div class="product-card">
+          <a href="{{ product.url }}" class="product-card__image">
+            {% if product.featured_image %}
+              <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.featured_image.alt | default: product.title }}" loading="lazy" width="400" height="400">
+            {% else %}
+              <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--color-text-muted);">Sin imagen</div>
+            {% endif %}
+          </a>
+          <div class="product-card__body">
+            <h3 class="product-card__title"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+            <p class="product-card__price">{{ product.price | money }}</p>
+            <a href="{{ product.url }}" class="btn btn--primary">Ver producto</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    {% if collection.products.size == 0 %}
+      <p style="text-align:center;color:var(--color-text-muted);">Aún no hay productos. Añádelos en el admin de Shopify.</p>
+    {% endif %}
+    {% if section.settings.show_view_all and collection.products.size > 0 %}
+      <p style="text-align: center; margin-top: 1.5rem;">
+        <a href="{{ collection.url }}" class="btn btn--outline">Ver todos los productos</a>
+      </p>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Colección destacada",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Título", "default": "Productos destacados" },
+    { "type": "text", "id": "subtitle", "label": "Subtítulo", "default": "Selección pensada para tu bienestar." },
+    { "type": "collection", "id": "collection", "label": "Colección" },
+    { "type": "range", "id": "products_to_show", "label": "Número de productos", "min": 2, "max": 12, "step": 1, "default": 4 },
+    { "type": "checkbox", "id": "show_view_all", "label": "Mostrar botón Ver todos", "default": true }
+  ]
+}
+{% endschema %}

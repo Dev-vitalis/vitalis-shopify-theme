@@ -1,0 +1,31 @@
+{% style %}
+  .about-trust { padding: 3.5rem 0; background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-white) 100%); }
+  .about-trust .container { max-width: 720px; text-align: center; }
+  .about-trust__title { font-family: var(--font-heading); font-size: 1.75rem; font-weight: 600; margin: 0 0 1rem; color: var(--color-text); }
+  .about-trust__text { color: var(--color-text-muted); margin: 0 0 1.5rem; line-height: 1.7; }
+  .about-trust__badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin-top: 1.5rem; }
+  .about-trust__badge { display: flex; align-items: center; gap: 0.5rem; font-weight: 500; color: var(--color-text); }
+  .about-trust__badge span { font-size: 1.25rem; }
+{% endstyle %}
+
+<section class="about-trust section">
+  <div class="container">
+    <h2 class="about-trust__title">{{ section.settings.title | default: 'Ciencia y bienestar para ti' }}</h2>
+    <p class="about-trust__text">{{ section.settings.text | default: 'En Vitalis elegimos productos que cuidan de tu salud. Envío a todo Colombia y pago contra entrega para que compres con confianza.' }}</p>
+    <div class="about-trust__badges">
+      <div class="about-trust__badge"><span>🚚</span> Envíos a todo el país</div>
+      <div class="about-trust__badge"><span>💳</span> Pago contra entrega</div>
+      <div class="about-trust__badge"><span>✓</span> Productos de calidad</div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Sobre / Confianza",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Título", "default": "Ciencia y bienestar para ti" },
+    { "type": "textarea", "id": "text", "label": "Texto", "default": "En Vitalis elegimos productos que cuidan de tu salud. Envío a todo Colombia y pago contra entrega para que compres con confianza." }
+  ]
+}
+{% endschema %}

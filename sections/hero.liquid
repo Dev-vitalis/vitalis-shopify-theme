@@ -1,0 +1,30 @@
+{% style %}
+  .hero { background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 50%, var(--color-teal) 100%); color: #fff; padding: 4rem 1.5rem; text-align: center; }
+  .hero__title { font-family: var(--font-heading); font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; margin: 0 0 1rem; line-height: 1.2; }
+  .hero__subtitle { font-size: 1.15rem; opacity: .95; margin: 0 0 1.5rem; max-width: 520px; margin-left: auto; margin-right: auto; }
+  .hero__cta { margin-top: 1rem; }
+  .hero .btn--primary { background: #fff; color: var(--color-primary); }
+  .hero .btn--primary:hover { background: var(--color-bg); color: var(--color-primary); }
+{% endstyle %}
+
+<section class="hero">
+  <div class="container">
+    <h1 class="hero__title">{{ section.settings.title | default: 'Tu salud, nuestra prioridad' }}</h1>
+    <p class="hero__subtitle">{{ section.settings.subtitle | default: 'Productos pensados para tu bienestar. Envío a todo el país y pago contra entrega.' }}</p>
+    <div class="hero__cta">
+      <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="btn btn--primary">{{ section.settings.cta_text | default: 'Ver productos' }}</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Título", "default": "Tu salud, nuestra prioridad" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtítulo", "default": "Productos pensados para tu bienestar. Envío a todo el país y pago contra entrega." },
+    { "type": "text", "id": "cta_text", "label": "Texto del botón", "default": "Ver productos" },
+    { "type": "url", "id": "cta_url", "label": "Enlace del botón" }
+  ]
+}
+{% endschema %}
